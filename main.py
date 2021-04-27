@@ -61,35 +61,16 @@ def search(message):
         bot.send_message(message.chat.id, final_actors)
         bot.send_message(message.chat.id, final_director_country_zhanr)
         bot.send_message(message.chat.id, final_link)
+
+        if float(rating.text) > float(6.5) and float(rating.text) < float(8.5):
+            bot.send_message(message.chat.id, 'Рекомендую к просмотру :3')
+        elif float(rating.text) >= float(8.5):
+            bot.send_message(message.chat.id, 'Категорически рекомендую к просмотру :D')
+        else:
+            bot.send_message(message.chat.id, 'Можете рискнуть, но я не советую смотреть это :(')
     except:
-        rating = driver.find_element_by_xpath('//*[@id="__next"]/div/div[2]/div[1]/div[2]/div/div[3]/div/div/div[1]/d'
-                                              'iv[2]/div/div[1]/span[1]/span')
-        title = driver.find_element_by_xpath('//*[@id="__next"]/div/div[2]/div[1]/div[2]/div/div[3]/div/div/div[1]/d'
-                                             'iv[1]/div[2]/h1/span')
-        director = driver.find_element_by_xpath(' //*[@id="__next"]/div/div[2]/div[1]/div[2]/div/div[3]/div/div/di'
-                                                'v[2]/div[1]/div/div[5]/div[2]/a')
-        country = driver.find_element_by_xpath('//*[@id="__next"]/div/div[2]/div[1]/div[2]/div/div[3]/div/div/div[2]/d'
-                                               'iv[1]/div/div[2]/div[2]')
-        link = driver.current_url
+       bot.send_message(message.chat.id, 'Извините, но по вашему запросу ничего не найдено')
 
-        final_title = 'Фильм: ' + title.text
-        final_rating = 'Оценка фильма: ' + rating.text
-        final_country = 'Страна: ' + country.text
-        final_director = 'Режиссер: ' + director.text
-        final_link = 'Перейти на кинопоиск: ' + link
-
-        bot.send_message(message.chat.id, final_title)
-        bot.send_message(message.chat.id, final_rating)
-        bot.send_message(message.chat.id, final_country)
-        bot.send_message(message.chat.id, final_director)
-        bot.send_message(message.chat.id, final_link)
-
-    if float(rating.text) > float(6.5) and float(rating.text) < float(8.5):
-        bot.send_message(message.chat.id, 'Рекомендую к просмотру :3')
-    elif float(rating.text) >= float(8.5):
-        bot.send_message(message.chat.id, 'Категорически рекомендую к просмотру :D')
-    else:
-        bot.send_message(message.chat.id, 'Можете рискнуть, но я не советую смотреть это :(')
 
 
 bot.polling()
