@@ -1,16 +1,17 @@
 import telebot
 from selenium import webdriver
 from time import sleep
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.by import By
 
-chrome_options = Options()
+firefox_options = Options()
 
-chrome_options.add_argument("--headless")
+
 
 
 bot = telebot.TeleBot("1761224186:AAEvD5uXlIu_npAwb7Zb5hFGnUE4y08riv4")
 
-driver = webdriver.Chrome(options=chrome_options)
+driver = webdriver.Firefox(options=firefox_options)
 
 
 @bot.message_handler(commands = ['start'])
@@ -44,11 +45,11 @@ def search(message):
     sleep(2)
 
     try:
-        title = driver.find_element_by_xpath('/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[2]/p/a')
-        rating = driver.find_element_by_xpath('/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[1]/div')
-        director_country_zhanr = driver.find_element_by_xpath('/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[2]/span[2]')
-        actors = driver.find_element_by_xpath('/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[2]/span[3]')
-        link = driver.find_element_by_xpath('/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[2]/p/a')
+        title = driver.find_element(By.XPATH, '/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[2]/p/a')
+        rating = driver.find_element(By.XPATH, '/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[1]/div')
+        director_country_zhanr = driver.find_element(By.XPATH, '/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[2]/span[2]')
+        actors = driver.find_element(By.XPATH, '/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[2]/span[3]')
+        link = driver.find_element(By.XPATH, '/html/body/main/div[4]/div[1]/table/tbody/tr/td[1]/div/div[2]/div/div[2]/p/a')
 
         final_title = 'Фильм: ' + title.text
         final_rating = 'Оценка фильма: ' + rating.text
@@ -69,8 +70,6 @@ def search(message):
         else:
             bot.send_message(message.chat.id, 'Можете рискнуть, но я не советую смотреть это :(')
     except:
-       bot.send_message(message.chat.id, 'Извините, но по вашему запросу ничего не найдено')
-
-
+        bot.send_message(message.chat.id, 'Извините, но по вашему запросу ничего не найдено')
 
 bot.polling()
