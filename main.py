@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 
 firefox_options = Options()
 
-
+# Я НА ЛИНУКСЕ!!!
 
 
 bot = telebot.TeleBot("1761224186:AAEvD5uXlIu_npAwb7Zb5hFGnUE4y08riv4")
