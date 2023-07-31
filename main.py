@@ -36,7 +36,7 @@ def search_films(message):
 
 @bot.message_handler(content_types=['text'])
 def text(message):
-    bot.send_message(message.chat.id, 'Ебало, уткни')
+    bot.send_message(message.chat.id, 'Используй команды!')
 def search(message):
     bot.send_message(message.chat.id, 'Произвожу поиск по кинопоиску')
     bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEBM-9ggtV21L_huTFjl2l95RBvHmDAUAAC3wAD7spnEA329LwL0r38HwQ')
